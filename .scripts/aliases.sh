@@ -1,10 +1,12 @@
+alias op="xdg-open"
 alias spc="cd ~/src/spc"
 alias uva="cd ~/src/spc/solutions/uva"
 alias uri="cd ~/src/spc/solutions/uri"
-alias pebmed="cd ~/Desktop/datasprints/pebmed"
 alias n="cd /opt/nifi"
-alias nlp="~/Desktop/ufmg/nlp"
+alias nlp="cd ~/Desktop/ufmg/nlp"
+alias ds="cd ~/Desktop/datasprints/"
 
+alias hac="cd ~/Desktop/hackathon"
 
 # Microfone
 alias hearyourself="pactl load-module module-loopback latency_msec=1"

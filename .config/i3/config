@@ -34,8 +34,20 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+set $close "Close the window? (y/n)"
+
+mode $close {
+    bindsym y kill, mode default
+    bindsym Return kill, mode default
+    bindsym $mod+q kill, mode default
+
+    bindsym n mode default
+    bindsym Escape mode default
+}
+
 # kill focused window
-bindsym $mod+Shift+q kill
+# bindsym $mod+Shift+q kill
+bindsym $mod+q mode $close
 
 
 # change focus
@@ -126,6 +138,7 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # Force to desktop
 assign [class="TelegramDesktop"] $workspace10
 assign [class="Slack"] $workspace9
+assign [class="discord"] $workspace9
 assign [class="Google Play Music Desktop Player"] $workspace8
 assign [class="Rambox"] $workspace7
 
@@ -134,22 +147,19 @@ for_window [class="calibre"] floating enable
 for_window [class="Nautilus"] floating enable
 for_window [class="File-roller"] floating enable
 for_window [class="Gnome-calculator"] floating enable
+for_window [class="Gnome-terminal"] floating enable
 
 # workspace default monitors
-workspace $workspace1 output eDP-1
-# workspace $workspace2 output eDP-1
-# workspace $workspace3 output eDP-1
-# workspace $workspace4 output eDP-1
-# workspace $workspace5 output eDP-1
+workspace $workspace1 output HDMI-1
 workspace $workspace2 output HDMI-1
 workspace $workspace3 output HDMI-1
 workspace $workspace4 output HDMI-1
 workspace $workspace5 output HDMI-1
-workspace $workspace6 output HDMI-1
-workspace $workspace7 output HDMI-1
-workspace $workspace8 output HDMI-1
-workspace $workspace9 output HDMI-1
-workspace $workspace10 output HDMI-1
+workspace $workspace6 output eDP-1
+workspace $workspace7 output eDP-1
+workspace $workspace8 output eDP-1
+workspace $workspace9 output eDP-1
+workspace $workspace10 output eDP-1
 
 # #---Function Buttons---# #
 # bindsym $mod+F1		exec --no-startup-id groff -mom ~/.local/share/larbs/readme.mom -Tpdf | zathura -
@@ -244,7 +254,10 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # start dmenu (a program launcher)
 # bindsym $mod+space exec dmenu_run
-bindsym $mod+space exec rofi -show run -lines 3 -font "System San Francisco Display 18"
+# bindsym $mod+space exec rofi -show run -lines 3 -font "System San Francisco Display 18"
+exec --no-startup-id albert
+bindsym $mod+space exec albert toggle
+bindsym $mod+F1 exec rofi -show run -lines 3 -font "System San Francisco Display 18"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -260,7 +273,7 @@ exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 
 exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
 
 # Lock screen with access password
-bindsym $mod+Shift+x exec /home/yuriniitsuma/.scripts/lock.sh
+bindsym Control+Mod1+q exec /home/yuriniitsuma/.scripts/lock.sh
 
 # set background image
 exec_always feh --bg-scale /home/yuriniitsuma/Pictures/Wallpaper.jpg
@@ -273,7 +286,9 @@ bindsym $mod+n exec nautilus
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
 # PrintScreen
-bindsym Print exec gnome-screenshot -i
+bindsym ctrl+Print exec gnome-screenshot -i
+bindsym Print exec flameshot gui
+
 
 # Japanese input
 exec --no-startup-id fcitx -d
